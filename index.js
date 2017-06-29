@@ -112,9 +112,10 @@ BinWrapper.prototype.version = function (range) {
 BinWrapper.prototype.path = function () {
 	var foundPath = null;
 	try {
+		const mainFilename = require.main.filename;
 		foundPath = which.sync(this.use(), { all: true })
 			.map(p => fs.realpath(p))
-			.find(p => p != __filename);
+			.find(p => p != mainFilename);
 	} catch (exception) {
 		// which can't find a locally installed version, ignore
 	}
